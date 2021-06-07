@@ -8,7 +8,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void login() {
-        open("/login");
+        open("login");
         $("#inputEmail").sendKeys(USER);
         $("#inputPassword").sendKeys(PASSWORD);
         $("#btnLogin").click();
