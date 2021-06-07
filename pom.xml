@@ -13,10 +13,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <testng.version>7.1.0</testng.version>
         <selenide.version>5.21.0</selenide.version>
-        <groupId>com.codeborne</groupId>
-        <artifactId>selenide</artifactId>
         <aspectj.version>1.9.6</aspectj.version>K
-        <version>${selenide.version}</version>
         <allure.version>2.13.9</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <lombok.version>1.18.8</lombok.version>
@@ -32,7 +29,6 @@
             <artifactId>selenide</artifactId>
             <version>${selenide.version}</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
