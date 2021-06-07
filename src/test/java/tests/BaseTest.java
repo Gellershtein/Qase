@@ -1,3 +1,5 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
