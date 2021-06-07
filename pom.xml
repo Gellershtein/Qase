@@ -11,6 +11,7 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <testng.version>7.1.0</testng.version>
         <selenide.version>5.21.0</selenide.version>
         <aspectj.version>1.9.6</aspectj.version>
@@ -20,7 +21,32 @@
         <javafaker.version>1.0.2</javafaker.version>
         <log4j-core.version>2.14.1</log4j-core.version>
         <jackson-dataformat-yaml.version>2.12.3</jackson-dataformat-yaml.version>
+        <suiteXmlFile>src/test/resources/testsuite.xml</suiteXmlFile>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+                        -Xmx256m
+                    </argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <!-- https://mvnrepository.com/artifact/com.codeborne/selenide -->
     <dependencies>
