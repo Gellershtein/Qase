@@ -11,8 +11,8 @@ public class LoginTest extends BaseTest {
     @Test
     public void login() {
         open("login");
-        $("#inputEmail").sendKeys(USER);
-        $("#inputPassword").sendKeys(PASSWORD);
+        $("#inputEmail").sendKeys("USER");
+        $("#inputPassword").sendKeys("PASSWORD");
         $("#btnLogin").click();
         $("#user-menu").shouldBe(Condition.visible);
     }
