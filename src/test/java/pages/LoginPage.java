@@ -3,15 +3,13 @@ package pages;
 import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.WebDriver;
 import pages.base.BasePage;
-import utils.PropertyReader;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 @Log4j2
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
     public static final String LOGIN_BUTTON = "#btnLogin";
 
     @Step("Open Login page")

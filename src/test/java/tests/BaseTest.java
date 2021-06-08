@@ -24,7 +24,7 @@ public abstract class BaseTest {
         PASSWORD = System.getenv().getOrDefault("QASE_PASSWORD", PropertyReader.getProperty("qase.password"));
         Configuration.browser = "chrome";
         Configuration.clickViaJs = true;
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.startMaximized = true;
         Configuration.timeout = 10000;
         loginPage = new LoginPage();
@@ -34,7 +34,7 @@ public abstract class BaseTest {
 
     @AfterClass(alwaysRun = true, description = "Close browser")
     public void tearDown() {
-//        getWebDriver().quit();
+        getWebDriver().quit();
     }
 }
 

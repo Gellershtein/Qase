@@ -47,13 +47,13 @@ public class CreateProjectPage {
     }
 
     public void createProject(Project project) {
-       String projectAccessType = project.getAccessType();
+        String projectAccessType = project.getAccessType();
         String membersAccessType = project.getMembersAccessType();
         $(inputTitleField).sendKeys(project.getProjectName());
         $(inputCodeField).sendKeys(project.getProjectCode());
         $(inputDescriptionField).sendKeys(project.getDescription());
         $(projectAccessType(projectAccessType)).click();
-        if(!projectAccessType.equals("Public")) {
+        if (!projectAccessType.equals("Public")) {
             $(membersAccessType(membersAccessType)).click();
         }
         $(createProjectButton).click();
