@@ -9,11 +9,9 @@ import static com.codeborne.selenide.Selenide.open;
 public class LoginTest extends BaseTest {
 
     @Test
-    public void login() {
-        open("login");
-        $("#inputEmail").sendKeys("USER");
-        $("#inputPassword").sendKeys("PASSWORD");
-        $("#btnLogin").click();
-        $("#user-menu").shouldBe(Condition.visible);
+    public void successfulLogin() {
+        loginPage
+                .openPage()
+                .login(USER,PASSWORD);
     }
 }
