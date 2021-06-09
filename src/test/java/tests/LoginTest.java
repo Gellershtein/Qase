@@ -8,6 +8,7 @@ public class LoginTest extends BaseTest {
     public void successfulLogin() {
         loginPage
                 .openPage()
-                .login(USER, PASSWORD);
+                .login(USER, PASSWORD)
+                .isPageOpened();
     }
 }

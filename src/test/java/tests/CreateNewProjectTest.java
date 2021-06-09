@@ -15,7 +15,8 @@ public class CreateNewProjectTest extends BaseTest {
                 .clickCreateProjectButton();
         Project project = ProjectFactory.get();
         createProjectPage
-                .createProject(project);
+                .createProject(project)
+                .isPageOpened();
         projectsPage
                 .openProjectsPage()
                 .findProjectInList(project);
