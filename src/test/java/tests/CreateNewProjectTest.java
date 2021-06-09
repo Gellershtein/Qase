@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class CreateNewProjectTest extends BaseTest {
 
-    @Test
+    @Test(description = "Create new Project and find it on Products page")
     public void projectShouldBeCreated() {
         loginPage
                 .openPage()

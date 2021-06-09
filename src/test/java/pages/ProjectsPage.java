@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import models.Project;
 import pages.base.BasePage;
@@ -20,14 +21,19 @@ public class ProjectsPage extends BasePage {
         CREATE_NEW_PROJECT_BUTTON.click();
     }
 
+    @Step("Open Projects page")
     public ProjectsPage openProjectsPage() {
+        log.info("Opening the Projects page");
         open("projects");
         return this;
     }
 
+    @Step("Find project: {projectName} on Projects Page")
     public void findProjectInList(Project project) {
-        SEARCH_INPUT.setValue(project.getProjectName());
-        PROJECTS_LIST.should(itemWithText(project.getProjectName()));
+        String projectName = project.getProjectName();
+        log.info(String.format("Finding project: %s on Projects Page", projectName));
+        SEARCH_INPUT.setValue(projectName);
+        PROJECTS_LIST.should(itemWithText(projectName));
         //Вопрос по коду ниже, как сделать через try-catch)
 //        while(true) {
 //            try {

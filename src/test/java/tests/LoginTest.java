@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(description = "Successful Login into {Configuration.baseUrl}")
     public void successfulLogin() {
         loginPage
                 .openPage()
