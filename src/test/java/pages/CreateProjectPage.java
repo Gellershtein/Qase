@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import models.Project;
@@ -11,14 +10,14 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Log4j2
 public class CreateProjectPage extends BasePage {
-    public static final SelenideElement INPUT_TITLE_FIELD = $("#inputTitle");
-    public static final SelenideElement INPUT_CODE_FIELD = $("#inputCode");
-    public static final SelenideElement INPUT_DESCRIPTION_FIELD = $("#inputDescription");
-    public static final SelenideElement CREATE_PROJECT_BUTTON = $("[type='submit']");
+    public String inputTitleField = "#inputTitle";
+    public String inputCodeField = "#inputCode";
+    public String inputDescriptionField = "#inputDescription";
+    public String createProjectButton = "[type='submit']";
+    String inputProjectAccessTypeField = "#private-access-type"; //Default Private
+    String inputMembersAccessTypeField = "#accessAll"; //Default ALL for Private
 
     //    Project access type
-    String inputProjectAccessTypeField = "#private-access-type"; //Default Private
-
     public String projectAccessType(String accessType) {
         switch (accessType) {
             case "Private":
@@ -32,8 +31,6 @@ public class CreateProjectPage extends BasePage {
     }
 
     //    Members access
-    String inputMembersAccessTypeField = "#private-access-type"; //Default Private
-
     public String membersAccessType(String membersAccessType) {
         switch (membersAccessType) {
             case "All":
@@ -55,24 +52,24 @@ public class CreateProjectPage extends BasePage {
         String projectAccessType = project.getAccessType();
         String membersAccessType = project.getMembersAccessType();
         log.info(String.format("Writing text: %s into the Project Name field", project.getProjectName()));
-        INPUT_TITLE_FIELD.sendKeys(project.getProjectName());
+        $(inputTitleField).sendKeys(project.getProjectName());
         log.info(String.format("Writing text: %s into the Project Code field", project.getProjectCode()));
-        INPUT_CODE_FIELD.sendKeys(project.getProjectCode());
+        $(inputCodeField).sendKeys(project.getProjectCode());
         log.info(String.format("Writing text: %s into Description field", project.getDescription()));
-        INPUT_DESCRIPTION_FIELD.sendKeys(project.getDescription());
+        $(inputDescriptionField).sendKeys(project.getDescription());
         log.info(String.format("Setting Project Access Type: %s", projectAccessType));
         $(projectAccessType(projectAccessType)).click();
         if (!projectAccessType.equals("Public")) {
             log.info(String.format("Setting Members Access Type: %s", membersAccessType));
             $(membersAccessType(membersAccessType)).click();
         }
-        CREATE_PROJECT_BUTTON.click();
+        $(createProjectButton).click();
         $("#project-avatar-container").shouldBe(Condition.visible);
         return new ProjectsDetailsPage();
     }
 
     @Override
     public boolean isPageOpened() {
-        return isExist(CREATE_PROJECT_BUTTON);
+        return isExist($(createProjectButton));
     }
 }

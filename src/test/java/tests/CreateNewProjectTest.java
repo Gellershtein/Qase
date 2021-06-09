@@ -19,6 +19,6 @@ public class CreateNewProjectTest extends BaseTest {
                 .isPageOpened();
         projectsPage
                 .openProjectsPage()
-                .findProjectInList(project);
+                .projectShouldBeInProjectInList(project);
     }
 }

@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeClass;
 import pages.CreateProjectPage;
 import pages.LoginPage;
 import pages.ProjectsDetailsPage;
-import pages.ProjectsPage;
+import pages.ProjectsListPage;
 import utils.PropertyReader;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -15,7 +15,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 public abstract class BaseTest {
     protected String USER, PASSWORD;
     protected LoginPage loginPage;
-    protected ProjectsPage projectsPage;
+    protected ProjectsListPage projectsPage;
     protected CreateProjectPage createProjectPage;
     protected ProjectsDetailsPage projectsDetailsPage;
 
@@ -30,7 +30,7 @@ public abstract class BaseTest {
         Configuration.startMaximized = true;
         Configuration.timeout = 10000;
         loginPage = new LoginPage();
-        projectsPage = new ProjectsPage();
+        projectsPage = new ProjectsListPage();
         createProjectPage = new CreateProjectPage();
         projectsDetailsPage = new ProjectsDetailsPage();
     }

@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Log4j2
 public abstract class BasePage {
-    public static final SelenideElement USER_MENU_AVATAR = $("#user-menu");
+    public static final String userMenuAvatar = "#user-menu";
 
     public abstract boolean isPageOpened();
 

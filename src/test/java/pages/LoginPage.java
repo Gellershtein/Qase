@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import pages.base.BasePage;
@@ -11,9 +10,9 @@ import static com.codeborne.selenide.Selenide.open;
 
 @Log4j2
 public class LoginPage extends BasePage {
-    public static final SelenideElement EMAIL_INPUT = $("#inputEmail");
-    public static final SelenideElement PASSWORD_INPUT = $("#inputPassword");
-    public static final SelenideElement LOGIN_BUTTON = $("#btnLogin");
+    public static final String inputEmail = "#inputEmail";
+    public static final String inputPassword = "#inputPassword";
+    public static final String loginButton = "#btnLogin";
 
     @Step("Open Login page")
     public LoginPage openPage() {
@@ -23,17 +22,17 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Fill in the login form")
-    public ProjectsPage login(String user, String password) {
+    public ProjectsListPage login(String user, String password) {
         log.info("Filling in login form and press button login");
-        EMAIL_INPUT.sendKeys(user);
-        PASSWORD_INPUT.sendKeys(password);
-        LOGIN_BUTTON.click();
-        USER_MENU_AVATAR.shouldBe(Condition.visible);
-        return new ProjectsPage();
+        $(inputEmail).sendKeys(user);
+        $(inputPassword).sendKeys(password);
+        $(loginButton).click();
+        $("#user-menu").shouldBe(Condition.visible);
+        return new ProjectsListPage();
     }
 
     @Override
     public boolean isPageOpened() {
-        return isExist(LOGIN_BUTTON);
+        return isExist($(loginButton));
     }
 }

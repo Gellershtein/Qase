@@ -1,7 +1,5 @@
 package pages;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import models.Project;
@@ -11,29 +9,29 @@ import static com.codeborne.selenide.CollectionCondition.itemWithText;
 import static com.codeborne.selenide.Selenide.*;
 
 @Log4j2
-public class ProjectsPage extends BasePage {
-    public static final SelenideElement CREATE_NEW_PROJECT_BUTTON = $("#createButton");
-    public static final SelenideElement SEARCH_INPUT = $("[name='title']");
-    public static final ElementsCollection PROJECTS_LIST = $$(".defect-title");
+public class ProjectsListPage extends BasePage {
+    public static final String createNewProjectButton = "#createButton";
+    public static final String searchInput = "[name='title']";
+    public static final String projectsList = ".defect-title";
     String nextPageButton = "//span[text()='›']";
 
     public void clickCreateProjectButton() {
-        CREATE_NEW_PROJECT_BUTTON.click();
+        $(createNewProjectButton).click();
     }
 
     @Step("Open Projects page")
-    public ProjectsPage openProjectsPage() {
+    public ProjectsListPage openProjectsPage() {
         log.info("Opening the Projects page");
         open("projects");
         return this;
     }
 
-    @Step("Find project: {projectName} on Projects Page")
-    public void findProjectInList(Project project) {
+    @Step("Find project: {project.projectName} on Projects Page")
+    public void projectShouldBeInProjectInList(Project project) {
         String projectName = project.getProjectName();
         log.info(String.format("Finding project: %s on Projects Page", projectName));
-        SEARCH_INPUT.setValue(projectName);
-        PROJECTS_LIST.should(itemWithText(projectName));
+        $(searchInput).setValue(projectName);
+        $$(projectsList).should(itemWithText(projectName));
         //Вопрос по коду ниже, как сделать через try-catch)
 //        while(true) {
 //            try {
@@ -48,6 +46,6 @@ public class ProjectsPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return isExist(USER_MENU_AVATAR);
+        return isExist($(userMenuAvatar));
     }
 }
