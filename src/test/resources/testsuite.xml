@@ -4,10 +4,16 @@
     <listeners>
         <!--  <listener class-name="tests.base.AnnotationTransformer"></listener> -->
     </listeners>
-    <test name="test 1">
+    <test name="LoginTest">
         <!--  <parameter name="browser" value="chrome"></parameter> -->
         <classes>
             <class name="tests.LoginTest"/>
+        </classes>
+    </test> <!-- Test -->
+    <test name="CreateNewProjectTest">
+        <!--  <parameter name="browser" value="chrome"></parameter> -->
+        <classes>
+            <class name="tests.CreateNewProjectTest"/>
         </classes>
     </test> <!-- Test -->
 </suite>
