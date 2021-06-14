@@ -5,8 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.NoSuchElementException;
 
-import static com.codeborne.selenide.Selenide.$;
-
 @Log4j2
 public abstract class BasePage {
     public static final String userMenuAvatar = "#user-menu";
