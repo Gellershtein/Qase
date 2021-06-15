@@ -1,18 +1,26 @@
 package models;
 
 import com.github.javafaker.Faker;
-import utils.RandomString;
+import com.github.javafaker.service.FakeValuesService;
+import com.github.javafaker.service.RandomService;
+
+import java.util.Locale;
 
 public class ProjectFactory {
     public static Project get() {
         Faker faker = new Faker();
-        RandomString randomString = new RandomString(6);
+        FakeValuesService fakeValuesService = new FakeValuesService(
+                new Locale("en-GB"), new RandomService());
+        String randomCode = fakeValuesService.regexify("[A-Z]{10}");
+
         return Project.builder()
-                .projectName(faker.company().name())
-                .projectCode(randomString.nextString())
+                .title(faker.company().name())
+                .code(randomCode)
                 .description("Test project creation")
-                .accessType("Private")
-                .membersAccessType("None")
+                .access("Private")
+                .group("None")
                 .build();
     }
+
+
 }
