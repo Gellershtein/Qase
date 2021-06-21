@@ -7,13 +7,11 @@ import models.Project;
 import pages.base.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
+import static elements.Input.*;
 
 @Log4j2
 public class CreateProjectPage extends BasePage {
-    public String inputTitleField = "#inputTitle";
-    public String inputCodeField = "#inputCode";
-    public String inputDescriptionField = "#inputDescription";
-    public String createProjectButton = "[type='submit']";
+
     String inputProjectAccessTypeField = "#private-access-type"; //Default Private
     String inputMembersAccessTypeField = "#accessAll"; //Default ALL for Private
 

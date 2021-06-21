@@ -1,18 +1,26 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import models.Project;
 import pages.base.BasePage;
 
 import static com.codeborne.selenide.CollectionCondition.itemWithText;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
+import static elements.Input.createProjectButton;
 
 @Log4j2
 public class ProjectsListPage extends BasePage {
     public static final String createNewProjectButton = "#createButton";
     public static final String searchInput = "[name='title']";
     public static final String projectsList = ".defect-title";
+    public static final String dropdownButton = ".btn-dropdown";
+    public static final String dropdownOptions = "//a[@aria-expanded='true']//following::div[contains(@class,'dropdown-item')]/a[text()='%s']";
+    public static final String notExistMessageLocator = ".no-project";
+    String notExistMessage = "It looks like you don't have any projects yet.";
+
     String nextPageButton = "//span[text()='›']";
 
     public void clickCreateProjectButton() {
@@ -26,26 +34,60 @@ public class ProjectsListPage extends BasePage {
         return this;
     }
 
-    @Step("Find project: {project.projectName} on Projects Page")
-    public void projectShouldBeInProjectInList(Project project) {
+    @Step("Open Project Settings page")
+    public ProjectSettingsPage openProjectSettingsPage(Project project) {
+//        log.info("Opening the Project Settings page");
+//        open(String.format("project/%s/settings/general",project.getProjectCode()));
+        open("project/" + project.getProjectCode() + "/settings/general");
+        return new ProjectSettingsPage();
+    }
+
+    @Step("Open Project Settings page by click")
+    public ProjectSettingsPage openProjectSettingsPageByClick(Project project) {
+        searchProject(project);
+        $(projectsList).click();
+        log.info("Opening the Project Settings page");
+        return new ProjectSettingsPage();
+    }
+
+    @Step("Find project on Projects Page")
+    public ProjectsListPage projectShouldBeInProjectInList(Project project) {
+        searchProject(project);
+        $$(projectsList).should(itemWithText(project.getProjectName()));
+        return this;
+    }
+
+    public ProjectsListPage searchProject(Project project) {
         String projectName = project.getProjectName();
         log.info(String.format("Finding project: %s on Projects Page", projectName));
         $(searchInput).setValue(projectName);
-        $$(projectsList).should(itemWithText(projectName));
-        //Вопрос по коду ниже, как сделать через try-catch)
-//        while(true) {
-//            try {
-//                $$(".defect-title").should(itemWithText(project.getProjectName()));
-//                break;
-//            } catch ( e) {
-//                $(byXpath(nextPageButton)).click();
-//                continue;
-//            }
-//        }
+        return this;
+    }
+
+    public ProjectsListPage clickDropdown() {
+        $(dropdownButton).click();
+        return this;
+    }
+
+    public ProjectsListPage selectDropdownOption(String option) {
+        $(byXpath(String.format(dropdownOptions, option))).click();
+        return this;
+    }
+
+    public ProjectsListPage isProjectExists(Project project) {
+        searchProject(project);
+        $(notExistMessageLocator).shouldBe(Condition.visible).shouldHave(Condition.text(notExistMessage));
+        return this;
     }
 
     @Override
     public boolean isPageOpened() {
         return isExist($(userMenuAvatar));
+    }
+
+    @Step("Click Update Settings")
+    public ProjectsListPage submit() {
+        $(createProjectButton).click();
+        return this;
     }
 }
