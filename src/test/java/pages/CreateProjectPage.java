@@ -47,12 +47,12 @@ public class CreateProjectPage extends BasePage {
     @Step("Create new Project")
     public ProjectsDetailsPage createProject(Project project) {
         log.info("Creating new Project");
-        String projectAccessType = project.getAccessType();
-        String membersAccessType = project.getMembersAccessType();
-        log.info(String.format("Writing text: %s into the Project Name field", project.getProjectName()));
-        $(inputTitleField).sendKeys(project.getProjectName());
-        log.info(String.format("Writing text: %s into the Project Code field", project.getProjectCode()));
-        $(inputCodeField).sendKeys(project.getProjectCode());
+        String projectAccessType = project.getAccess();
+        String membersAccessType = project.getGroup();
+        log.info(String.format("Writing text: %s into the Project Name field", project.getTitle()));
+        $(inputTitleField).sendKeys(project.getTitle());
+        log.info(String.format("Writing text: %s into the Project Code field", project.getCode()));
+        $(inputCodeField).sendKeys(project.getCode());
         log.info(String.format("Writing text: %s into Description field", project.getDescription()));
         $(inputDescriptionField).sendKeys(project.getDescription());
         log.info(String.format("Setting Project Access Type: %s", projectAccessType));

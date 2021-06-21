@@ -38,7 +38,7 @@ public class ProjectsListPage extends BasePage {
     public ProjectSettingsPage openProjectSettingsPage(Project project) {
 //        log.info("Opening the Project Settings page");
 //        open(String.format("project/%s/settings/general",project.getProjectCode()));
-        open("project/" + project.getProjectCode() + "/settings/general");
+        open("project/" + project.getCode() + "/settings/general");
         return new ProjectSettingsPage();
     }
 
@@ -53,12 +53,12 @@ public class ProjectsListPage extends BasePage {
     @Step("Find project on Projects Page")
     public ProjectsListPage projectShouldBeInProjectInList(Project project) {
         searchProject(project);
-        $$(projectsList).should(itemWithText(project.getProjectName()));
+        $$(projectsList).should(itemWithText(project.getTitle()));
         return this;
     }
 
     public ProjectsListPage searchProject(Project project) {
-        String projectName = project.getProjectName();
+        String projectName = project.getTitle();
         log.info(String.format("Finding project: %s on Projects Page", projectName));
         $(searchInput).setValue(projectName);
         return this;

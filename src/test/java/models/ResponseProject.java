@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Project {
-    String title, code, description, access, group;
+public class ResponseProject {
+    boolean status;
+    Project result;
 }
